@@ -1,0 +1,24 @@
+version: '3.6'
+
+services: 
+  smart-brain-api:
+    container_name: backend
+    # image: node:10.12.0
+    build: ./
+    command: npm start
+    working_dir: /usr/src/smart-brain-api 
+    ports:
+      - "8085:8085"
+    
+# build allows us to build from our ouwn dockerfile instead of a default image like node 10.12.0
+# build will build the service out of the docker file
+ 
+# docker-compose build
+#  our instruction told the -compose to create a service called smart brain-api 
+#  using the dockerfile we created previously... we mapped the port 8085 so that we have access to it
+#  we also ran npm start to run our server... when we have only one service we most likely work with single dockerfile
+#  here we user docker-compose to build our image instead of docker...
+
+
+#  docker-compose run
+# working dir should be where our package.json or app exist
