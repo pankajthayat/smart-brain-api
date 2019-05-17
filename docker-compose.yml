@@ -1,14 +1,40 @@
 version: '3.6'
 
 services: 
+  # backend api
   smart-brain-api:
     container_name: backend
     # image: node:10.12.0
     build: ./
     command: npm start
     working_dir: /usr/src/smart-brain-api 
+    environment:
+      POSTGRES_USER: sally
+      POSTGRES_PASSWORD: pankaj
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    links:
+      - postgres
     ports:
       - "8085:8085"
+    volumes: 
+        - ./:/usr/src/smart-brain-api
+
+  # postgres
+  postgres:
+    environment:
+      POSTGRES_USER: sally
+      POSTGRES_PASSWORD: pankaj
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    image: postgres
+    ports:
+      - "4306:5432"
+
+
+
+
+
     
 # build allows us to build from our ouwn dockerfile instead of a default image like node 10.12.0
 # build will build the service out of the docker file
@@ -22,3 +48,14 @@ services:
 
 #  docker-compose run
 # working dir should be where our package.json or app exist
+
+
+#if we dont wnna use dockerfile(by /build)...use image
+ #docker-compose up --build
+#volumes: allows us to access file system...mapping user dir to docker..conatiner file system will see the change and run nodemon agin
+# In case nodemon doesn't refresh the server, adjust "nodemon server.js" with the flag -L
+# "nodemon -L server.js"
+
+
+#docker-compose up -d
+#docker-compose exec smart-brain-api bash   for using bash of our project
