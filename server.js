@@ -20,19 +20,21 @@ const image = require('./controllers/image');
 //     database : 'smartbrain'
 //   }
 // });
-console.log(process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD);
-console.log(process.env.POSTGRES_DB, process.env.POSTGRES_HOST)
-
+// console.log(process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD);
+// console.log(process.env.POSTGRES_DB, process.env.POSTGRES_HOST)
+console.log("uri : ", process.env.POSTGRES_URI)
 const db = knex({
   client: 'pg',
-  connection: {
-    host : process.env.POSTGRES_HOST, //'127.0.0.1',
-    user : process.env.POSTGRES_USER,//'postgres',
-    password : process.env.POSTGRES_PASSWORD,//'pankaj',
-    database : process.env.POSTGRES_DB//'smartbrain'
-  }
+   connection: process.env.POSTGRES_URI
+  // {
+  //   host : process.env.POSTGRES_HOST, //'127.0.0.1',
+  //   user : process.env.POSTGRES_USER,//'postgres',
+  //   password : process.env.POSTGRES_PASSWORD,//'pankaj',
+  //   database : process.env.POSTGRES_DB//'smartbrain'
+  // }
 });
 
+console.log("db ip : ")
 const app = express();
 
 console.log("hey");

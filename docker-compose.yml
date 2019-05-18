@@ -9,10 +9,12 @@ services:
     command: npm start
     working_dir: /usr/src/smart-brain-api 
     environment:
-      POSTGRES_USER: sally
-      POSTGRES_PASSWORD: pankaj
-      POSTGRES_DB: smart-brain-docker
-      POSTGRES_HOST: postgres
+      # POSTGRES_USER: sally
+      # POSTGRES_PASSWORD: pankaj
+      # POSTGRES_DB: smart-brain-docker
+      # POSTGRES_HOST: postgres  
+      # ....insted of all these setting...we can do aset up uri
+       POSTGRES_URI: postgres://sally:pankaj@postgres:5432/smart-brain-docker
     links:
       - postgres
     ports:
@@ -27,9 +29,10 @@ services:
       POSTGRES_PASSWORD: pankaj
       POSTGRES_DB: smart-brain-docker
       POSTGRES_HOST: postgres
-    image: postgres
+    # image: postgres --anytime we need to use dockerfile use build
+    build: ./postgres # build whatever at the root of postf=gres
     ports:
-      - "4306:5432"
+      - "5432:5432"
 
 
 
@@ -59,3 +62,7 @@ services:
 
 #docker-compose up -d
 #docker-compose exec smart-brain-api bash   for using bash of our project
+
+
+# psql postgres://sally:pankaj@192.168.99.100:4306/smart-brain-docker
+# when accesssing from localhost give ip....else postgres...bcoz now its connected to container
