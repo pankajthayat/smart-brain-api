@@ -32,7 +32,7 @@ services:
     # image: postgres --anytime we need to use dockerfile use build
     build: ./postgres # build whatever at the root of postf=gres
     ports:
-      - "5432:5432"
+      - "5400:5432"
 
 
 
